@@ -1,0 +1,14 @@
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\WebScraper.exe.config
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\WebScraper.exe
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\WebScraper.pdb
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.csprojAssemblyReference.cache
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.Form1.resources
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.Properties.Resources.resources
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.csproj.GenerateResource.cache
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.csproj.CoreCompileInputs.cache
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.csproj.CopyComplete
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.exe
+C:\Users\Vicka\source\repos\WebScraper\WebScraper\obj\Debug\WebScraper.pdb
