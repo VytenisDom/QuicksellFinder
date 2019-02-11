@@ -26,7 +26,8 @@ namespace WebScraper
             table.Columns.Add("Title", typeof(string));
             table.Columns.Add("ListingPrice", typeof(string));
             table.Columns.Add("RealPrice", typeof(string));
-            table.Columns.Add("Profit", typeof(string));
+            table.Columns.Add("Potencial ROI", typeof(double));
+            table.Columns.Add("ROI in %", typeof(string));
             dataGridView1.DataSource = table;
             dataGridView1.Columns[0].Width = 200;
         }
@@ -66,19 +67,6 @@ namespace WebScraper
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            int pageNum = 1;
-            var Listings = await ListingsFromPage(1);
-            while (Listings.Count > 0){
-                foreach (var listing in Listings){
-                    string fullName = listing.Effect + " " + listing.HatBaseName;
-                    double finalAdPrice = finalPrice(listing.AdPrice);
-                    double finalRealPrice = finalPrice(listing.RealPrice);
-                    string profitMargin = profit(finalAdPrice, finalRealPrice);
-                    table.Rows.Add(fullName, finalAdPrice, finalRealPrice, profitMargin);
-                }
-                pageNum++;
-                Listings = await ListingsFromPage(pageNum);
-            }
         }
 
         public static string profit(double Ad, double Real)
@@ -87,9 +75,23 @@ namespace WebScraper
                 double b = Math.Round(Real - Ad, 2);
                 return b.ToString();
             } else {
-                return "Unknown";
+                return "0";
             }
            
+        }
+
+        public static string profitPercentage(double Ad, double Real)
+        {
+            if (Real != 0)
+            {
+                double b = Math.Round((1 - (Ad / Real) ) * 100, 2);
+                return b.ToString();
+            }
+            else
+            {
+                return "Unknown";
+            }
+
         }
 
         public static double finalPrice(string str)
@@ -147,6 +149,40 @@ namespace WebScraper
         public static double convert(double refined, double ratio)
         {
             return Math.Round(refined / ratio, 2);
+        }
+        int pageNum = 0;
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            pageNum++;
+            var Listings = await ListingsFromPage(pageNum);
+            foreach (var listing in Listings)
+            {
+                string fullName = listing.Effect + " " + listing.HatBaseName;
+                double finalAdPrice = finalPrice(listing.AdPrice);
+                double finalRealPrice = finalPrice(listing.RealPrice);
+                string profitMargin = profit(finalAdPrice, finalRealPrice);
+                string profitPercent = profitPercentage(finalAdPrice, finalRealPrice);
+                //if(Double.Parse(profitPercent) > 0)
+                table.Rows.Add(fullName, finalAdPrice, finalRealPrice, profitMargin, profitPercent + "%");
+            }
+        }
+        bool on = false;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!on) {
+                timer1.Enabled = true;
+                on = true;
+                button1.BackColor = System.Drawing.Color.Red;
+                button1.Text = "STOP";
+                timer1.Interval = int.Parse(textBox1.Text);
+                textBox1.Enabled = false;
+            } else {
+                timer1.Enabled = false;
+                on = false;
+                button1.BackColor = System.Drawing.Color.LimeGreen;
+                button1.Text = "START";
+                textBox1.Enabled = true;
+            }
         }
     }
     public class Item
