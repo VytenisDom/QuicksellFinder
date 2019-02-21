@@ -35,7 +35,7 @@ namespace WebScraper
         private async Task<List<Item>> ListingsFromPage(int pageNum)
         {
             string url = @"https://backpack.tf/classifieds?page="+ pageNum.ToString() +"&slot=misc&quality=5";
-            
+            label2.Text = "Currently indexing page " + pageNum.ToString();
             var doc = await Task.Factory.StartNew(() => web.Load(url));
             var idNodes = doc.DocumentNode.SelectNodes("//*[@id=\"page-content\"]/div[4]/div[1]/div/div[2]/ul");
             List<string> ids = new List<string>();
@@ -63,10 +63,6 @@ namespace WebScraper
                 toReturn.Add(new Item() { HatBaseName = titles[i], AdPrice = prices[i], RealPrice = bptfPrices[i], Effect = effects[i] });
                 
             return toReturn;
-        }
-
-        private async void Form1_Load(object sender, EventArgs e)
-        {
         }
 
         public static string profit(double Ad, double Real)
@@ -175,13 +171,16 @@ namespace WebScraper
                 button1.BackColor = System.Drawing.Color.Red;
                 button1.Text = "STOP";
                 timer1.Interval = int.Parse(textBox1.Text);
+                pageNum = int.Parse(textBox2.Text);
                 textBox1.Enabled = false;
+                textBox2.Enabled = false;
             } else {
                 timer1.Enabled = false;
                 on = false;
                 button1.BackColor = System.Drawing.Color.LimeGreen;
-                button1.Text = "START";
+                button1.Text = "RESUME";
                 textBox1.Enabled = true;
+                textBox2.Enabled = true;
             }
         }
     }
