@@ -179,6 +179,7 @@ namespace WebScraper
                 on = false;
                 button1.BackColor = System.Drawing.Color.LimeGreen;
                 button1.Text = "RESUME";
+                textBox2.Text = pageNum.ToString();
                 textBox1.Enabled = true;
                 textBox2.Enabled = true;
             }
