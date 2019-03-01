@@ -27,7 +27,7 @@ namespace WebScraper
             table.Columns.Add("ListingPrice", typeof(string));
             table.Columns.Add("RealPrice", typeof(string));
             table.Columns.Add("Potencial ROI", typeof(double));
-            table.Columns.Add("ROI in %", typeof(string));
+            table.Columns.Add("ROI in %", typeof(double));
             dataGridView1.DataSource = table;
             dataGridView1.Columns[0].Width = 200;
         }
@@ -76,16 +76,15 @@ namespace WebScraper
            
         }
 
-        public static string profitPercentage(double Ad, double Real)
+        public static double profitPercentage(double Ad, double Real)
         {
             if (Real != 0)
             {
-                double b = Math.Round((1 - (Ad / Real) ) * 100, 2);
-                return b.ToString();
+                return Math.Round((1 - (Ad / Real) ) * 100, 2);
             }
             else
             {
-                return "Unknown";
+                return 0;
             }
 
         }
@@ -157,9 +156,9 @@ namespace WebScraper
                 double finalAdPrice = finalPrice(listing.AdPrice);
                 double finalRealPrice = finalPrice(listing.RealPrice);
                 string profitMargin = profit(finalAdPrice, finalRealPrice);
-                string profitPercent = profitPercentage(finalAdPrice, finalRealPrice);
+                double profitPercent = profitPercentage(finalAdPrice, finalRealPrice);
                 //if(Double.Parse(profitPercent) > 0)
-                table.Rows.Add(fullName, finalAdPrice, finalRealPrice, profitMargin, profitPercent + "%");
+                table.Rows.Add(fullName, finalAdPrice, finalRealPrice, profitMargin, profitPercent);
             }
         }
         bool on = false;
